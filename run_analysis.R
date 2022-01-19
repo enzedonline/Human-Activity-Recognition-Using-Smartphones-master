@@ -85,7 +85,7 @@ rm(dfTidyTrain) # remove large dataset
 ## free up memory
 gc()
 
-# Write final dataset to file
+# Write final dataset to file (not required for project)
 # outFile <- file.path('.', 'data', 'processed', 'tidy_Samsung_Galaxy_S_accelerometers.csv')
 # write.csv(final, outFile)
 
@@ -93,12 +93,14 @@ gc()
 # measurement type, for each subject ID, for each activity
 # Create second summary as above but split by directional property where it exists
 
-# To skip recreating the combined tidy dataset and read prepaired data, uncomment the following two lines:
+# To skip recreating the combined tidy dataset and read prepared data (not required for project), 
+# uncomment the following two lines:
 # dataFile <- file.path('.', 'data', 'processed', 'tidy_Samsung_Galaxy_S_accelerometers.csv')
 # final <- read.csv(dataFile)
 
-# Create summary - average mean and standard deviation for each
+# Create summary - time and frequency average mean and standard deviation for each
 # measurement type (including direction), for each subject ID, for each activity
+# convert empty results from NaN to NA
 final_directional_summary <- final %>% 
   group_by(activity, subjectID, measurement_type, direction) %>%
   summarise(

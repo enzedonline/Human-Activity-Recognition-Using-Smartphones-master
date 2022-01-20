@@ -45,28 +45,28 @@ Requirements have been addressed in the following order:
 
 While standard deviation is straightforward (all those columns ending with *-std()*), there are many columns not ending in *-mean()* but which include the word mean in the feature name:
 
-|Column Index|Feature Name|
-|-------|-----|-------|----|
-|294    |fBodyAcc-meanFreq()-X|       |    |
-|295    |fBodyAcc-meanFreq()-Y|       |    |
-|296    |fBodyAcc-meanFreq()-Z|       |    |
-|373    |fBodyAccJerk-meanFreq()-X|       |    |
-|374    |fBodyAccJerk-meanFreq()-Y|       |    |
-|375    |fBodyAccJerk-meanFreq()-Z|       |    |
-|452    |fBodyGyro-meanFreq()-X|       |    |
-|453    |fBodyGyro-meanFreq()-Y|       |    |
-|454    |fBodyGyro-meanFreq()-Z|       |    |
-|513    |fBodyAccMag-meanFreq()|       |    |
-|526    |fBodyBodyAccJerkMag-meanFreq()|       |    |
-|539    |fBodyBodyGyroMag-meanFreq()|       |    |
-|552    |fBodyBodyGyroJerkMag-meanFreq()|       |    |
-|555    |angle(tBodyAccMean,gravity)|       |    |
-|556    |angle(tBodyAccJerkMean),gravityMean)|       |    |
-|557    |angle(tBodyGyroMean,gravityMean)|       |    |
-|558    |angle(tBodyGyroJerkMean,gravityMean)|       |    |
-|559    |angle(X,gravityMean)|       |    |
-|560    |angle(Y,gravityMean)|       |    |
-|561    |angle(Z,gravityMean)|       |    |
+|Column Index|Feature Name                        |
+|------------|------------------------------------|
+|294         |fBodyAcc-meanFreq()-X               |
+|295         |fBodyAcc-meanFreq()-Y               |
+|296         |fBodyAcc-meanFreq()-Z               |
+|373         |fBodyAccJerk-meanFreq()-X           |
+|374         |fBodyAccJerk-meanFreq()-Y           |
+|375         |fBodyAccJerk-meanFreq()-Z           |
+|452         |fBodyGyro-meanFreq()-X              |
+|453         |fBodyGyro-meanFreq()-Y              |
+|454         |fBodyGyro-meanFreq()-Z              |
+|513         |fBodyAccMag-meanFreq()              |
+|526         |fBodyBodyAccJerkMag-meanFreq()      |
+|539         |fBodyBodyGyroMag-meanFreq()         |
+|552         |fBodyBodyGyroJerkMag-meanFreq()     |
+|555         |angle(tBodyAccMean,gravity)         |
+|556         |angle(tBodyAccJerkMean),gravityMean)|
+|557         |angle(tBodyGyroMean,gravityMean)    |
+|558         |angle(tBodyGyroJerkMean,gravityMean)|
+|559         |angle(X,gravityMean)                |
+|560         |angle(Y,gravityMean)                |
+|561         |angle(Z,gravityMean)                |
 
 I have omitted the meanFreq() columns based on information in features_info.txt:
 > meanFreq(): Weighted average of the frequency components to obtain a mean frequency

@@ -44,6 +44,7 @@ Requirements have been addressed in the following order:
 >Extract only the measurements on the mean and standard deviation
 
 While standard deviation is straightforward (all those columns ending with *-std()*), there are many columns not ending in *-mean()* but which include the word mean in the feature name:
+
 |Column Index|Feature Name|
 |-------|-----|-------|----|
 |294    |fBodyAcc-meanFreq()-X|       |    |
@@ -137,6 +138,7 @@ Since they are both values of different qualities for the same derived measureme
 
 #### The value of breaking the data down further
 We're left with 13 measurement types:
+
 |   |   |
 |---|---|
 |1  | BodyAcc           |
@@ -152,6 +154,7 @@ We're left with 13 measurement types:
 |11 | BodyBodyAccJerkMag |
 |12 | BodyBodyGyroMag |
 |13 | BodyBodyGyroJerkMag |
+
 It's possible to split further breaking into 2 groups for those that begin with Body and those with Gravity. Or does each core type require its own group (e.g. Body Acc, BodyGyro, GravityAcc etc.) from which additional measurement types may be derived.
 
 In the end, it comes down to what is the right format for the requirement at hand (and perhaps a few proactive additional features if they don't incur unnecessary time and performance, such as the additional measurementID and source columns here which will allow additional methods of grouping and subsetting in the future if required).
@@ -229,12 +232,12 @@ To meet Step 3, we'll also need to read in the `activies_labels.txt` dataset. Th
     #   for each recorded activity
     #   
     get_activity_labels <- function(filename){
-    # Read the activity labels
-    activity_labels <- read_delim(activity_label_list, 
-                                    delim=" ", 
-                                    col_names = c('index', 'description'),
-                                    show_col_types = FALSE
-    )
+        # Read the activity labels
+        activity_labels <- read_delim(activity_label_list, 
+                                        delim=" ", 
+                                        col_names = c('index', 'description'),
+                                        show_col_types = FALSE
+        )
     }
 
 The function `create_data_set()` in dataset.R does the reading from the three dataset files plus applies the data read in from activity labels and features above. This function is run once each for the test and train datasets:
@@ -265,38 +268,38 @@ The function `create_data_set()` in dataset.R does the reading from the three da
 	#   Returned dataframe has an index on the activity in order of activity code
 	#   
 	create_data_set <- function(dataFile, activityFile, subjectFile, dfFeatures, dfActivityLabels){
-	  # Read the dataset selecting only the subsetted feature list, set all columns to numeric
-	  x<-read_fwf(dataFile, 
-		      col_types = rep('n', times = nrow(dfFeatures)),
-		      col_select = dfFeatures$index,
-		      show_col_types = FALSE
-	  )
+        # Read the dataset selecting only the subsetted feature list, set all columns to numeric
+        x<-read_fwf(dataFile, 
+                col_types = rep('n', times = nrow(dfFeatures)),
+                col_select = dfFeatures$index,
+                show_col_types = FALSE
+        )
 
-	  # Set column names to feature description
-	  names(x) <- dfFeatures$description
+        # Set column names to feature description
+        names(x) <- dfFeatures$description
 
-	  # Read activity list for dataset
-	  activity <- read_table(activityFile, 
-				 col_names = 'activity'
-	  )
+        # Read activity list for dataset
+        activity <- read_table(activityFile, 
+                    col_names = 'activity'
+        )
 
-	  # Apply activity names to activity list
-	  activity <- lapply(activity, function(x) dfActivityLabels$description[match(x, dfActivityLabels$index)])
+        # Apply activity names to activity list
+        activity <- lapply(activity, function(x) dfActivityLabels$description[match(x, dfActivityLabels$index)])
 
-	  # Create factor for activity labels in the order they appear in the activity_labels
-	  # definition file. Sorting by activity will be by their numeric order rather than alphabetically.
-	  activity$activity <- factor(factor(activity$activity),levels=dfActivityLabels$description)
+        # Create factor for activity labels in the order they appear in the activity_labels
+        # definition file. Sorting by activity will be by their numeric order rather than alphabetically.
+        activity$activity <- factor(factor(activity$activity),levels=dfActivityLabels$description)
 
-	  # read subject list for dataset
-	  subjects <- read_table(subjectFile, 
-				 col_names = 'subjectID'
-	  )
+        # read subject list for dataset
+        subjects <- read_table(subjectFile, 
+                    col_names = 'subjectID'
+        )
 
-	  # create unique ID for each measurement
-	  id <- data.frame(measurementID = seq.int(nrow(x)))
+        # create unique ID for each measurement
+        id <- data.frame(measurementID = seq.int(nrow(x)))
 
-	  # combine dataframes to add measurementID, subjectID and activity to main data set
-	  bind_cols(id, subjects, activity, x)
+        # combine dataframes to add measurementID, subjectID and activity to main data set
+        bind_cols(id, subjects, activity, x)
 	}
 
 The above function completes the following steps:
@@ -342,49 +345,49 @@ From the tidy data structure determined above in [Determining obversation vs var
     #     time measurements of BodyAcc in the X direction
     tidy_dataset <- function(dataset, datasource) {
     
-    # gather columns - one row per measurement & aggregate type
-    # separate gathered column based on direction vector X, Y, Z or none 
-    # swap direction NA's for string N/A
-    # separate the aggregate type for each measurement type (mean, std)
-    # create a column indicating whether each measurement was for time or frequency
-    # strip the t/f prefix of each measurement type
-    # use suppressWarnings to avoid long list of NAs warnings on first seperate call
-    suppressWarnings({
-        dataset<-dataset %>% 
-        gather('type', 'value', -c(measurementID, subjectID, activity)) %>% 
-        separate(col=type, into=c("what", "direction"), sep = '-(?=[-X]$)|-(?=[-Y]$)|-(?=[-Z]$)') %>% 
-        replace_na(list(direction = 'N/A')) %>% 
-        separate(col=what, into=c('measurement_type', 'aggregate_type')) %>%  
-        mutate(
-            domain = substring(measurement_type, 1, 1)
-        ) %>%
-        mutate(
-            domain = stringr::str_replace_all(domain, c('t'='time', 'f'='frequency')),
-            measurement_type = stringr::str_replace(measurement_type,"^t|^f","")
+        # gather columns - one row per measurement & aggregate type
+        # separate gathered column based on direction vector X, Y, Z or none 
+        # swap direction NA's for string N/A
+        # separate the aggregate type for each measurement type (mean, std)
+        # create a column indicating whether each measurement was for time or frequency
+        # strip the t/f prefix of each measurement type
+        # use suppressWarnings to avoid long list of NAs warnings on first seperate call
+        suppressWarnings({
+            dataset<-dataset %>% 
+                gather('type', 'value', -c(measurementID, subjectID, activity)) %>% 
+                separate(col=type, into=c("what", "direction"), sep = '-(?=[-X]$)|-(?=[-Y]$)|-(?=[-Z]$)') %>% 
+                replace_na(list(direction = 'N/A')) %>% 
+                separate(col=what, into=c('measurement_type', 'aggregate_type')) %>%  
+                mutate(
+                    domain = substring(measurement_type, 1, 1)
+                ) %>%
+                mutate(
+                    domain = stringr::str_replace_all(domain, c('t'='time', 'f'='frequency')),
+                    measurement_type = stringr::str_replace(measurement_type,"^t|^f","")
+                )
+        })
+    
+        # create a factor for the measurement types based on current order (still in original)
+        # sorting will be on their column order as they appeared in the original X file
+        # rather than alphabetically
+        dataset$measurement_type <- factor(
+            factor(dataset$measurement_type),
+            levels=unlist(unique(dataset$measurement_type))
         )
-    })
     
-    # create a factor for the measurement types based on current order (still in original)
-    # sorting will be on their column order as they appeared in the original X file
-    # rather than alphabetically
-    dataset$measurement_type <- factor(
-        factor(dataset$measurement_type),
-        levels=unlist(unique(dataset$measurement_type))
-    )
-    
-    # combine domain and aggregate type column values (ie time & mean -> time_mean etc)
-    # spread the combined values (combine the rows for the same measurement ID & type
-    #   to create one column for each the of the aggregates, 4 in total)
-    # add a column to indicate the source of the rows in this dataset
-    # move time column in front of the frequency columns to reflect order in original X
-    # sort by measurementID > activity > measurement_type
-    dataset %>% 
-        unite(temp, domain, aggregate_type) %>% 
-        spread(temp, value) %>% 
-        mutate(source = datasource) %>% 
-        relocate(time_mean, time_std, .after = direction) %>%
-        arrange(measurementID, activity, measurement_type)
-    
+        # combine domain and aggregate type column values (ie time & mean -> time_mean etc)
+        # spread the combined values (combine the rows for the same measurement ID & type
+        #   to create one column for each the of the aggregates, 4 in total)
+        # add a column to indicate the source of the rows in this dataset
+        # move time column in front of the frequency columns to reflect order in original X
+        # sort by measurementID > activity > measurement_type
+        dataset %>% 
+            unite(temp, domain, aggregate_type) %>% 
+            spread(temp, value) %>% 
+            mutate(source = datasource) %>% 
+            relocate(time_mean, time_std, .after = direction) %>%
+            arrange(measurementID, activity, measurement_type)
+        
     }
 
 As well as meeting the intended tidy data structure, the above code adds a factor to the `measurement_type` column so that the column is sorted according to the column index of those original variables rather than sorting alphabetically.

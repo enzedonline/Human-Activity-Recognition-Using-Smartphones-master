@@ -116,25 +116,30 @@ Could it be useful to group data based on either direction or the stem variable 
 
 For these reasons, the direction is a variable and split off the measurement type while each remains an observation:
 
-tBodyAcc-mean()-X | tBodyAcc-mean()-Y | tBodyAcc-mean()-Z
+    tBodyAcc-mean()-X | tBodyAcc-mean()-Y | tBodyAcc-mean()-Z
 
 becomes
 
-tBodyAcc-mean() | X
-tBodyAcc-mean() | Y
-tBodyAcc-mean() | Z
+    tBodyAcc-mean() | X
+    tBodyAcc-mean() | Y
+    tBodyAcc-mean() | Z
 
 How to deal with those variables that don't have directional component? The direction variable will just have an 'N/A' value for the direction variable.
 
 #### Mean and Standard Deviation Values
 The mean and standard deviation values are suffixed with `-mean()` and `-std()` respectively. Since they are measures of two different values for the same observation, they remain a variable in the final dataset. 
 
-Stripping away the suffixes for each leaves us with tBodyAcc & ftBodyAcc.
+Stripping away the suffixes for each leaves us with `tBodyAcc` & `fBodyAcc`.
 
 #### Time and Frequency Values
 Each variable is prefixed with a t or f to indicate if this was a measurement in the time domain (seconds) or frequency domain (Hertz). Further, there is often a t and f value for the same measurement variable (e.g. `tBodyAcc` and `fBodyAcc`).
 
-Since they are both values of different qualities for the same derived measurement type (`BodyAcc`), they should be considered variables of the same observation. This leaves us with a derived measurement type with four possible values - time mean, time standard deviation, frequency mean & frequency standard deviation.
+Since they are both values of different qualities for the same derived measurement type (`BodyAcc`), they should be considered variables of the same observation. This leaves us with a derived measurement type with four possible values: 
+
+1. time mean
+2. time standard deviation
+3. frequency mean
+4. frequency standard deviation
 
 #### The value of breaking the data down further
 We're left with 13 measurement types:
@@ -184,6 +189,7 @@ As mentioned earlier, I found the steps best completed out of order. For perform
 #### Reading the Data
 
 This stage takes care of the following requirements, in the following order:
+
  2.	Extract only the measurements on the mean and standard deviation for each measurement. 
  4.	Appropriately label the data set with descriptive variable names. 
  3.	Use descriptive activity names to name the activities in the data set.

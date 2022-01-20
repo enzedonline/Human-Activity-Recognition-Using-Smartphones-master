@@ -44,7 +44,7 @@ Requirements have been addressed in the following order:
 #### Step 2
 >Extract only the measurements on the mean and standard deviation
 
-While standard deviation is straightforward (all those columns ending with *-std()*), there are many columns not ending in *-mean()* but which include the word mean in the feature name:
+While standard deviation is straightforward (all those columns with the sub-string *-std()*), there are many columns that do not include *-mean()* but which include the word mean in the feature name:
 
 |Column Index|Feature Name                        |
 |------------|------------------------------------|

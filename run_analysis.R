@@ -87,7 +87,7 @@ gc()
 
 # Write final dataset to file (not required for project)
 # outFile <- file.path('.', 'data', 'processed', 'tidy_Samsung_Galaxy_S_accelerometers.csv')
-# write.csv(final, outFile)
+# write.csv(final, outFile, row.names = F)
 
 # Create summaries - average mean, meanFreq and standard deviation for each
 # measurement type, for each subject ID, for each activity
@@ -101,7 +101,7 @@ gc()
 # Create summary - time and frequency average mean and standard deviation for each
 # measurement type (including direction), for each subject ID, for each activity
 # convert empty results from NaN to NA
-final_directional_summary <- final %>% 
+final_summary <- final %>% 
   group_by(activity, subjectID, measurement_type, direction) %>%
   summarise(
     avg_time_mean = mean(time_mean, na.rm = T), 
@@ -112,7 +112,7 @@ final_directional_summary <- final %>%
   mutate_at(vars(-group_cols()),~ifelse(is.nan(.), NA,.))
 
 ## Write directional summarised final dataset to file
-outFile <- 'directional_summarised_Samsung_Galaxy_S_accelerometers.txt'
-write.table(final_directional_summary, outFile, row.names = F)
+outFile <- 'summarised_Samsung_Galaxy_S_accelerometers.txt'
+write.table(final_summary, outFile, row.names = F)
 
 

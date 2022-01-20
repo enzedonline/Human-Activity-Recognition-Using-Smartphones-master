@@ -161,7 +161,7 @@ We're left with 13 measurement types:
 |12 | BodyBodyGyroMag |
 |13 | BodyBodyGyroJerkMag |
 
-It's possible to split further breaking into 2 groups for those that begin with Body and those with Gravity. Or does each core type require its own group (e.g. Body Acc, BodyGyro, GravityAcc etc.) from which additional measurement types may be derived.
+It's possible to split further breaking into 2 groups for those that begin with Body and those with Gravity. Or does each core type require its own group (e.g. `BodyAcc`, `BodyGyro`, `GravityAcc` etc.) from which additional measurement types may be derived.
 
 In the end, it comes down to what is the right format for the requirement at hand (and perhaps a few proactive additional features if they don't incur unnecessary time and performance, such as the additional measurementID and source columns here which will allow additional methods of grouping and subsetting in the future if required).
 
@@ -191,9 +191,9 @@ As mentioned earlier, I found the steps best completed out of order. For perform
 
 This stage takes care of the following requirements, in the following order:
 
- 2.	Extract only the measurements on the mean and standard deviation for each measurement. 
- 4.	Appropriately label the data set with descriptive variable names. 
- 3.	Use descriptive activity names to name the activities in the data set.
+ - \#2.	Extract only the measurements on the mean and standard deviation for each measurement. 
+ - \#4.	Appropriately label the data set with descriptive variable names. 
+ - \#3.	Use descriptive activity names to name the activities in the data set.
 
 The first step here is to read the `features.txt` file and subset the list of features to only those containing the string mean() or std() (see [Interpreting the requirements](#interpreting-the-requirements) above)
 
@@ -309,7 +309,7 @@ The function `create_data_set()` in dataset.R does the reading from the three da
         bind_cols(id, subjects, activity, x)
 	}
 
-The above function completes the following steps:
+The above function completes the following project requirements:
 
 **Step 2**
 The `read_fwf` command pulls in only desired data using the column indices founds in the `get_mean_std_cols()` function. Additionally, since we know that the columns from this data source are all of type `number`, we can set this before reading to improve performance and avoid R needing to run 'best guess' algorithms.
@@ -425,7 +425,7 @@ Because not all measure types have both time and frequency measurements, those m
 That's the fifth and final requirement met.
 
 ### A final note on memory management
-Because this script deals with some large datasets, ones no longer required are removed from memory, notably the pre-tidy dataframes once the tidy has completed, and the test/train tidy dataframes once the merge has completed. 
+Because this script deals with some large datasets, those no longer required are removed from memory, notably the pre-tidy dataframes once the tidy has completed, and the test/train tidy dataframes once the merge has completed. 
 
 Additionally a garbage clean call (`gc()`) is made after merging to free up any memory still being allocated for deleted objects.
 

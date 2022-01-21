@@ -44,9 +44,9 @@ To read in the full data set, use the following code:
 
     data <- read.csv('./data/processed/tidy_Samsung_Galaxy_S_accelerometers.csv')
     View(data)
-    
+
 #### Assumptions:
-- The Human Activity Recognition Using Smartphones Dataset has been unzipped to ./data/raw, its original file structure preserved.
+- To run the full script, the [Human Activity Recognition Using Smartphones Dataset](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip) has been unzipped to ./data/raw, its original file structure preserved.
 - The file dataset.R containing functions for the processing of the dataset is found in ./src
 - The following libraries have been installed on the machine running this script: dplyr, tidyr, readr, stringr
 

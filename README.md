@@ -118,6 +118,8 @@ How to apply this to the Human Activity Recognition Using Smartphones dataset?
 
 In the subsetted dataset, there are 66 variables to consider for each measurement.
 
+**Note**: while the code book for the source data gives units for the raw signal values, it does not specify the units for the derived time and frequency measurements. It is assumed here that they are in Standard International units (seconds and Hertz respectively). While this works for the purpose of the exercise, if it's incorrect, and each derived type has differing units, then it would fundamentally change the shape of the final dataset. Real world scenario - get clarification from the source before starting.
+
 Scanning these variables, certain patterns start to emerge:
 
 #### Direction Components

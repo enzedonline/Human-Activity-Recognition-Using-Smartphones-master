@@ -102,7 +102,7 @@ As per the requirements, only data from those columns from the original data rel
 |frequency_std *num*|If the derived measurement has a frequency component, the standard deviation for the measurement is displayed here.                                             |
 |source *chr*|Column to indicate if the measurement came from the training or test dataset. Retains the ability to subset the data based on source should the need arise later.|
 
-**Note**: the code book for the source data does not specify the units for the derived time and frequency measurements. It is assumed here that they are in Standard International units (seconds and Hertz respectively).
+**Note**: while the code book for the source data gives units for the raw signal values, it does not specify the units for the derived time and frequency measurements. It is assumed here that they are in Standard International units (seconds and Hertz respectively). While this works for the purpose of the exercise, if it's incorrect, and each derived type has differing units, then it would fundamentally change the shape of the final dataset. Real world scenario - get clarification from the source before starting.
 
 ##### Factors
 Two variables are factored, the levels applied in the order that they appear in the raw data:

@@ -13,6 +13,8 @@
   - [Mean and Standard Deviation Values](#mean-and-standard-deviation-values)
   - [Time and Frequency Values](#time-and-frequency-values)
   - [The value of breaking the data down further](#the-value-of-breaking-the-data-down-further)
+  - [Conclusion](#conclusion)
+- [Tidying the data](#tidying-the-data)
 - [The Process](#the-process)
   - [Reading the Data](#reading-the-data)
   - [Tidying the data](#tidying-the-data)
@@ -167,18 +169,24 @@ We're left with 13 measurement types:
 |13 | BodyBodyGyroJerkMag |
 
 It's possible to split further breaking into 2 groups for those that begin with Body and those with Gravity. Or does each core type require its own group (e.g. `BodyAcc`, `BodyGyro`, `GravityAcc` etc.) from which additional measurement types may be derived.
-
+#### Conclusion
 In the end, it comes down to what is the right format for the requirement at hand (and perhaps a few proactive additional features if they don't incur unnecessary time and performance, such as the additional measurementID and source columns here which will allow additional methods of grouping and subsetting in the future if required).
 
 >Tidy data is only worthwhile if it makes analysis easier. *- Hadley Wickham*
 
+Could the data have been left in its initial state? For the purposes of this dataset (to produce the summary data in step 5), then yes. A wide format with each measurement on one row would still give us the result required, it could be argued that the data is already in a tidy state. However, in this format, it makes further analyses difficult: what if I want the time measurements of the horizontal components (X, Y) of each measurement derivative that has them?  The decomposed model discussed above makes this a simple dplyr filter > group > summarise operation. The wide model involves a more complex operation.
+
+Readability is another factor to be considered here as well. At 69 columns, the pre-tidied data set is difficult to scan for information, hard to see what's happpening across a range of variables for one measurement as the dataset is several screens wide when viewed. Using the decomposed model discussed above you end up with 8 columns of interest (plus 2 auxillary) which easily fit on one screen and allow you to quickly sort and filter to those elements of interest.
+
+### Tidying the data
+
 For the requirements of this project, I've gone with treating each of the measurement types above as an observation (including one observation each for their directional component where applicable):
 
-Taking the `BodyAcc` example above, the messy data is formatted:
+Taking the `BodyAcc` example above, the raw data is formatted:
 |tBodyAcc-mean()-X|tBodyAcc-mean()-Y|tBodyAcc-mean()-Z|tBodyAcc-std()-X|tBodyAcc-std()-Y|tBodyAcc-std()-Z|fBodyAcc-mean()-X|fBodyAcc-mean()-Y|fBodyAcc-mean()-Z|fBodyAcc-std()-X|fBodyAcc-std()-Y|fBodyAcc-std()-Z|
 |-----------------|-----------------|-----------------|----------------|----------------|----------------|-----------------|-----------------|-----------------|----------------|----------------|----------------|
 
-Which is transformed to:
+In the tidied data set, this is transformed to:
 |measurement_type|direction|time_mean|time_std|frequency_mean|frequency_std|
 |----------------|---------|---------|--------|--------------|-------------|
 |BodyAcc         |X        |         |        |              |             |

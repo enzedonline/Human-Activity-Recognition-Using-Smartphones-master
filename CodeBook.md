@@ -187,6 +187,7 @@ For certain measurement types, time measurements may not exist, while for others
 In all, there are 23 observations per measurement.
 
 For example, taking the raw data for `BodyAcc`, there are 12 columns relating to mean and std:
+
 |Column Index|Measurement Variable|
 |------------|--------------------|
 |1           |tBodyAcc-mean()-X   |

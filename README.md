@@ -38,6 +38,11 @@ To read in the summarised tidy data set, use the following code:
     data <- read.table('summarised_Samsung_Galaxy_S_accelerometers.txt', header = TRUE)
     View(data)
 
+To read in the full data set, use the following code:
+
+    data <- read.csv('./data/processed/tidy_Samsung_Galaxy_S_accelerometers.csv')
+    View(data)
+
 ### Order of project requirements
 Requirements have been addressed in the following order:
 
@@ -182,16 +187,20 @@ Readability is another factor to be considered here as well. At 69 columns, the 
 
 For the requirements of this project, I've gone with treating each of the measurement types above as an observation (including one observation each for their directional component where applicable):
 
-Taking the `BodyAcc` example above, the raw data is formatted:
+Taking the `BodyAcc` example above, the raw data is formatted as a single row over 12 columns:
+
 |tBodyAcc-mean()-X|tBodyAcc-mean()-Y|tBodyAcc-mean()-Z|tBodyAcc-std()-X|tBodyAcc-std()-Y|tBodyAcc-std()-Z|fBodyAcc-mean()-X|fBodyAcc-mean()-Y|fBodyAcc-mean()-Z|fBodyAcc-std()-X|fBodyAcc-std()-Y|fBodyAcc-std()-Z|
 |-----------------|-----------------|-----------------|----------------|----------------|----------------|-----------------|-----------------|-----------------|----------------|----------------|----------------|
 
 In the tidied data set, this is transformed to:
+
 |measurement_type|direction|time_mean|time_std|frequency_mean|frequency_std|
 |----------------|---------|---------|--------|--------------|-------------|
 |BodyAcc         |X        |         |        |              |             |
 |BodyAcc         |Y        |         |        |              |             |
 |BodyAcc         |Z        |         |        |              |             |
+
+**Note**: by doing this, we've increased the cell count by 50% (12 cells to 18 cells). Likewise with unidirectional measurement types, the cell count goes from 4 to 6. The dataset here is big but not huge. With a vast set of data including tens of millions of rows, then the merits of breaking down the data like this would need to be weighed against increased memory and storage usage.
 
 This is repeated for each of the 13 measurement types. Those with no directional component will be a single observation and a string value `'N/A'` in the direction column. Those measurement types with no time values will have a value of `NA` in those columns, likewise for those with no frequency values.
 

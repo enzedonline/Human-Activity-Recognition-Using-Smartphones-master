@@ -56,21 +56,21 @@ In this manner, there are 13 distinct types of derived measurement.
 
 A list of these measurement types and their characteristics is shown below.
 
-|Measurement        |Directional|Time|Frequency|
-|-------------------|-----------|----|---------|
-|BodyAcc            |Yes         |Yes |Yes      |
-|GravityAcc         |Yes         |Yes |No       |
-|BodyAccJerk        |Yes         |Yes |Yes      |
-|BodyGyro           |Yes         |Yes |Yes      |
-|BodyGyroJerk       |Yes         |Yes |No       |
-|BodyAccMag         |No        |Yes |Yes      |
-|GravityAccMag      |No        |Yes |No       |
-|BodyAccJerkMag     |No        |Yes |No       |
-|BodyGyroMag        |No        |Yes |No       |
-|BodyGyroJerkMag    |No        |Yes |No       |
-|BodyBodyAccJerkMag |No        |No  |Yes      |
-|BodyBodyGyroMag    |No        |No  |Yes      |
-|BodyBodyGyroJerkMag|No        |No  |Yes      |
+|Measurement        |Directional|Time     |Frequency|Description|
+|-------------------|-----------|---------|---------|---------|
+|BodyAcc            |Yes         |Yes |Yes      |Body Acceleration|
+|GravityAcc         |Yes         |Yes |No       |Gravity Acceleration|
+|BodyAccJerk        |Yes         |Yes |Yes      |Body Acceleration Jerk|
+|BodyGyro           |Yes         |Yes |Yes      |Body Angular Velocity|
+|BodyGyroJerk       |Yes         |Yes |No       |Body Angular Velocity Jerk|
+|BodyAccMag         |No        |Yes |Yes      |Body Acceleration Magnitude|
+|GravityAccMag      |No        |Yes |No       |Gravity Acceleration Magnitude|
+|BodyAccJerkMag     |No        |Yes |No       |Body Acceleration Jerk Magnitude|
+|BodyGyroMag        |No        |Yes |No       |Body Angular Velocity Magnitude|
+|BodyGyroJerkMag    |No        |Yes |No       |Body Angular Velocity Jerk Magnitude|
+|BodyBodyAccJerkMag |No        |No  |Yes      |Body Acceleration Jerk Magnitude|
+|BodyBodyGyroMag    |No        |No  |Yes      |Body Angular Velocity Magnitude|
+|BodyBodyGyroJerkMag|No        |No  |Yes      |Body Angular Velocity Jerk Magnitude|
 
 #### final Dataset
 A dataframe with 236,877 observations and 10 variables.

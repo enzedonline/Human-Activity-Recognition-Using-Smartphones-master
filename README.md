@@ -31,6 +31,11 @@
 |./run_analysis.R                                         |Main script to produce both the combined and summarised datasets and output the finalised summary to file|
 |./src/dataset.R                                          |Functions for reading transforming and tidying the split data sets          |
 
+To read in the summarised tidy data set, use the following code:
+
+    data <- read.table('summarised_Samsung_Galaxy_S_accelerometers.txt', header = TRUE)
+    View(data)
+
 ### Order of project requirements
 Requirements have been addressed in the following order:
 

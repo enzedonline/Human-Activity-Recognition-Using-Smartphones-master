@@ -248,7 +248,7 @@ Once both data sets have been read and tidied, the `measurementID` of the test d
 The final step is to combine the two sets using `bind_rows()`.
 
 #### Producing the summary
-No transformation is required for this stage:
-1. The complete dataset is passed through a set of `dplyr` functions to group by `activity`, `subjectID`, `measurement_type` & `direction`.
+No transformation is required for this stage. The complete dataset is passed through a set of `dplyr` functions to:
+1. Group by `activity`, `subjectID`, `measurement_type` & `direction`.
 2. Summarise with mean for each of the four value columns. The columns are named `avg_time_mean`, `avg_time_std`, `avg_frequency_mean` & `avg_frequency_std` respectively.
 3. Replace all `NaN` values with `NA` where those measurement types do not have a time or frequency value.

@@ -35,6 +35,16 @@ Further reading on the methodology, assumptions and reasoning for the format of 
 ### Usage
     run_analysis
 
+To read in the summarised tidy data set, use the following code:
+
+    data <- read.table('summarised_Samsung_Galaxy_S_accelerometers.txt', header = TRUE)
+    View(data)
+
+To read in the full data set, use the following code:
+
+    data <- read.csv('./data/processed/tidy_Samsung_Galaxy_S_accelerometers.csv')
+    View(data)
+    
 #### Assumptions:
 - The Human Activity Recognition Using Smartphones Dataset has been unzipped to ./data/raw, its original file structure preserved.
 - The file dataset.R containing functions for the processing of the dataset is found in ./src
